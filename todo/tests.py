@@ -113,3 +113,13 @@ class TodoViewTestCase(TestCase):
         response = client.get('/1/')
 
         self.assertEqual(response.status_code, 404)
+
+    def test_edit_get_success(self):
+        task = Task(title='task1', due_at=timezone.make_aware(datetime(2023, 7, 1)))
+        task.save()
+        client = Client()
+        response = client.get('/{}/update'.format(task.pk))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.templates[0].name, 'todo/edit.html')
+        self.assertEqual(response.context['task'], task)
