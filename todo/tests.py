@@ -114,6 +114,14 @@ class TodoViewTestCase(TestCase):
 
         self.assertEqual(response.status_code, 404)
 
+    def test_detele_get_redirect(self):
+        task = Task(title='task', due_at=timezone.make_aware(datetime(2023, 7, 1)))
+        task.save()
+        client = Client()
+        response = client.get('/{}/delete'.format(task.pk))
+
+        self.assertEqual(response.status_code, 302)
+
     def test_edit_get_success(self):
         task = Task(title='task1', due_at=timezone.make_aware(datetime(2023, 7, 1)))
         task.save()
