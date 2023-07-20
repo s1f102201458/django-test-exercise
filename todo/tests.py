@@ -113,3 +113,11 @@ class TodoViewTestCase(TestCase):
         response = client.get('/1/')
 
         self.assertEqual(response.status_code, 404)
+
+    def test_detele_get_fail(self):
+        task = Task(title='task', due_at=timezone.make_aware(datetime(2023, 7, 1)))
+        task.save()
+        client = Client()
+        response = client.get('/{}/delete'.format(task.pk))
+
+        self.assertEqual(response.status_code, 302)
