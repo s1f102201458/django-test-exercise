@@ -6,6 +6,7 @@
     <title>To Do Application</title>
     <meta charset="UTF-8">
     <meta name="author" content="INIAD">
+    <link href="{% static 'todo/css/close.css' %}" rel="stylesheet">
   </head>
 
   <body>
@@ -41,9 +42,9 @@
         <li>Due at: {{ task.due_at }}</li>
         {% endif %}
         {% if task.completed %} 
-        <li>Status: Completed</li>
+        <li id=completed>Status: Completed</li>
         {% else %}
-        <li>Status: Not Completed</li>
+        <li id=notcompleted>Status: Not Completed</li>
         {% endif %}
       </ul>
     </div>
